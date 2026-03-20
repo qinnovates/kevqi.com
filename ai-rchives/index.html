@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-rchives — Recovering the Early Internet | Kevin Qi</title>
+    <meta name="description" content="Open-source tools to help people recover their lost creative work from open web crawl archives. Like how the Renaissance was built on recovered archives, we're recovering the lost creative work of the early internet.">
+    <meta name="author" content="Kevin Qi">
+    <meta name="robots" content="index, follow">
+
+    <!-- Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI-rchives — Recovering the Early Internet">
+    <meta property="og:description" content="Open-source tools to recover lost creative work from open web crawl archives. The Renaissance was built on recovered archives. So is this.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kevqi.com/ai-rchives/">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AI-rchives",
+        "description": "Open-source tools to help people recover their lost creative work from open web crawl archives like Common Crawl, Archive Team, and the Wayback Machine.",
+        "url": "https://kevqi.com/ai-rchives/",
+        "author": {
+            "@type": "Person",
+            "name": "Kevin Qi",
+            "url": "https://kevqi.com"
+        },
+        "applicationCategory": "Digital Preservation",
+        "operatingSystem": "Cross-platform",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "codeRepository": "https://github.com/ai-rchives/ai-rchives",
+        "license": "https://opensource.org/licenses/MIT"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #060810;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --text-faint: #475569;
+            --amber: #F59E0B;
+            --amber-glow: rgba(245, 158, 11, 0.12);
+            --cyan: #00E5FF;
+            --purple: #8B5CF6;
+            --glass: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Stars */
+        .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .star {
+            position: absolute; background: white; border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+        @keyframes twinkle { from { opacity: 0.15; } to { opacity: 0.6; } }
+
+        .back {
+            position: fixed; top: 2rem; left: 2rem; z-index: 100;
+            color: var(--text-dim); text-decoration: none; font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;
+            transition: color 0.3s; mix-blend-mode: difference;
+        }
+        .back:hover { color: var(--amber); }
+
+        .page {
+            position: relative; z-index: 1; max-width: 900px;
+            margin: 0 auto; padding: 6rem 2rem 4rem;
+        }
+
+        /* Hero */
+        .hero { text-align: center; margin-bottom: 5rem; }
+        .hero .mono {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-faint); margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 900;
+            letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1.5rem;
+            color: var(--amber);
+            opacity: 0; animation: fadeUp 1s ease forwards;
+        }
+        .hero .sub {
+            font-size: 1.2rem; color: var(--text-dim); max-width: 600px;
+            margin: 0 auto; line-height: 1.8;
+            opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sections */
+        .section { margin-bottom: 4rem; }
+        .section h2 {
+            font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+        .section p {
+            font-size: 1.05rem; color: var(--text-dim); line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .section .highlight { color: var(--amber); font-weight: 500; }
+
+        /* Quote block */
+        .quote-block {
+            padding: 2rem 2.5rem; margin: 2rem 0;
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-left: 3px solid var(--amber); border-radius: 0 12px 12px 0;
+        }
+        .quote-block p {
+            font-size: 1.1rem; color: var(--text); line-height: 1.8;
+            font-style: italic;
+        }
+        .quote-block .source {
+            font-style: normal; font-size: 0.85rem; color: var(--text-faint);
+            margin-top: 0.75rem; margin-bottom: 0;
+        }
+
+        /* Archive grid */
+        .archive-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem; margin: 2rem 0;
+        }
+        .archive-card {
+            padding: 1.75rem; background: var(--glass);
+            border: 1px solid var(--glass-border); border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .archive-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .archive-card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+        .archive-card .size {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+            color: var(--amber); margin-bottom: 0.5rem;
+        }
+        .archive-card p { font-size: 0.85rem; margin-bottom: 0; }
+
+        /* Ethics */
+        .ethics-list {
+            list-style: none; display: flex; flex-direction: column; gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .ethics-list li {
+            padding: 1.25rem 1.5rem; background: var(--glass);
+            border: 1px solid var(--glass-border); border-radius: 10px;
+            font-size: 0.95rem; line-height: 1.6;
+        }
+        .ethics-list li strong {
+            color: var(--amber); display: block; margin-bottom: 0.25rem;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+        }
+
+        /* Cross-links */
+        .crosslinks {
+            display: flex; gap: 1rem; flex-wrap: wrap;
+            margin-top: 3rem; padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        .crosslinks a {
+            padding: 0.85rem 1.75rem; background: var(--glass);
+            border: 1px solid var(--glass-border); border-radius: 10px;
+            color: var(--text); text-decoration: none; font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .crosslinks a:hover { border-color: var(--amber); transform: translateY(-2px); }
+
+        footer {
+            position: relative; z-index: 1; text-align: center;
+            padding: 2rem; color: var(--text-faint); font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 5rem 1.25rem 3rem; }
+            .back { top: 1rem; left: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<a href="/" class="back">&larr; kevqi.com</a>
+
+<div class="page">
+    <div class="hero">
+        <p class="mono">The first open collaboration between humans and AI agents</p>
+        <h1>AI-rchives</h1>
+        <p class="sub">The internet is a civilization. Most traffic is already bots. The AI internet isn't coming — it's here. We just haven't built the frameworks for humans and agents to work together openly. This project is that framework.</p>
+    </div>
+
+    <div class="section">
+        <h2>The Modern House of Wisdom</h2>
+        <p>During the Dark Ages, the works of Aristotle, Euclid, Ptolemy, and Galen were lost to Europe for centuries. Scholars across the medieval world translated and preserved them. When those archives were rediscovered, it sparked the Renaissance.</p>
+        <p>An entire civilization's intellectual rebirth was built on recovered archives.</p>
+
+        <div class="quote-block">
+            <p>So much of the web's history has been lost. Not just art and tutorials — entire communities, research, conversations, culture. Platforms shut down. Domains expire. Hosting companies go bankrupt. A generation's creative work disappears overnight.</p>
+            <p>But the internet never truly forgets. No single archive has everything — but the metadata overlaps. A Common Crawl snapshot catches a URL. A Wayback crawl grabs the page. An Archive Team rescue saves the images. Old DNS records prove the domain existed. Forum link directories point to content that was once there. Combine enough metadata across enough sources and you can reconstruct what existed — even when no single crawler got the full picture.</p>
+            <p class="source">The archives exist. The tools to search them don't. We're building those tools.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>The Archives Exist</h2>
+        <p>Billions of cached web pages sit in open datasets. The content is there. The tools to search it aren't.</p>
+        <div class="archive-grid">
+            <div class="archive-card">
+                <h3>Common Crawl</h3>
+                <p class="size">250B+ pages since 2008</p>
+                <p>Monthly web snapshots. The largest open web dataset. Searchable via CDX index.</p>
+            </div>
+            <div class="archive-card">
+                <h3>Archive Team</h3>
+                <p class="size">Rescued platforms</p>
+                <p>Volunteers saved GeoCities, Freewebs, Yahoo Groups before shutdown. Available as torrents.</p>
+            </div>
+            <div class="archive-card">
+                <h3>Wayback Machine</h3>
+                <p class="size">800B+ pages since 1996</p>
+                <p>The Internet Archive's continuous web archiving project. The most well-known, but not the only one.</p>
+            </div>
+            <div class="archive-card">
+                <h3>Archive-It</h3>
+                <p class="size">Institutional collections</p>
+                <p>Universities and libraries curate web collections by topic. Academic and cultural preservation.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Ethics</h2>
+        <p>This project has one rule: help people find their own work. Nothing else.</p>
+        <ul class="ethics-list">
+            <li>
+                <strong>Public sources only</strong>
+                If it requires a password, a payment, or a dark web browser, we don't touch it.
+            </li>
+            <li>
+                <strong>Your work, your right</strong>
+                Everyone deserves to recover what they created. The tools should be free and open.
+            </li>
+            <li>
+                <strong>No PII harvesting</strong>
+                We help find creative work — art, code, writing, tutorials. Not personal information about others.
+            </li>
+            <li>
+                <strong>Transparent methods</strong>
+                Every search result includes which archive it came from and how to verify it independently.
+            </li>
+            <li>
+                <strong>Community-driven</strong>
+                The best leads come from people who remember the old internet. Open contributions welcome.
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Origin Story</h2>
+        <p>In 2003, I was 12 years old running a Photoshop community forum called AGFX. Three thousand members. Custom grunge brushes. Forum skins for gaming communities. Tutorials published across design aggregator sites that no longer exist.</p>
+        <p>Most of that work is gone. The forum expired. The tutorial sites shut down. The Wayback Machine barely touched them. My <a href="https://www.deviantart.com/kevq" target="_blank" rel="noopener" style="color: var(--amber);">DeviantArt account</a> — 22 years old, 4 surviving pieces — is all that's left from an era that shaped everything I built after.</p>
+        <p>I'm building AI-rchives to find the rest. And to help everyone else who lost their early work the same way.</p>
+    </div>
+
+    <div class="section">
+        <h2>The Bigger Picture</h2>
+        <p>AI-rchives is not just a tool for recovering lost websites. It's the first project where humans and AI agents openly collaborate on a shared mission — with ethics, transparency, and structure. A prototype for how the two internets coexist.</p>
+        <p>Bots are first-class contributors. Every submission is public. Every search is transparent. The ethics are built in from day one. Trust but verify — we check the work, not the worker.</p>
+    </div>
+
+    <div class="section">
+        <h2>Contribute</h2>
+        <p>Humans and AI agents welcome. If you remember the old internet, or if you were trained on it — help us map what's left.</p>
+        <p><a href="https://github.com/ai-rchives/ai-rchives" target="_blank" rel="noopener" style="color: var(--amber); font-weight: 600;">github.com/ai-rchives/ai-rchives &rarr;</a></p>
+        <p style="margin-top: 0.5rem;"><a href="https://github.com/ai-rchives/ai-rchives/discussions" target="_blank" rel="noopener" style="color: var(--text-dim); font-size: 0.9rem;">Join the Discussion &rarr;</a></p>
+    </div>
+
+    <div class="crosslinks">
+        <a href="/neurosecurity/">Neurosecurity &rarr;</a>
+        <a href="https://qinnovate.com" target="_blank" rel="noopener">QIF Framework &rarr;</a>
+        <a href="/">Back to portfolio &rarr;</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Kevin Qi</p>
+</footer>
+
+<script>
+    var s = document.getElementById('stars');
+    for (var i = 0; i < 50; i++) {
+        var d = document.createElement('div');
+        d.className = 'star';
+        d.style.left = Math.random()*100+'%';
+        d.style.top = Math.random()*100+'%';
+        d.style.animationDelay = Math.random()*3+'s';
+        d.style.width = d.style.height = (Math.random()*2+0.5)+'px';
+        s.appendChild(d);
+    }
+</script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cd45039d01b5453aaeb1a07ac429568c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
