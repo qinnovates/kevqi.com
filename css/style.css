@@ -237,6 +237,20 @@ body {
     line-height: 1.7;
 }
 
+.timeline-era {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 3rem 0 1.5rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+.timeline-era span {
+    color: var(--cyan);
+}
+
 .dim {
     color: var(--text-muted) !important;
     font-size: 0.85rem !important;
