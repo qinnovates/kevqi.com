@@ -176,7 +176,7 @@
                 </div>
             </div>
 
-            <div class="timeline-era"><span>Web 3.0</span> &mdash; AI agents, BCIs, the two internets (2024&ndash;present)</div>
+            <div class="timeline-era"><span>AI Renaissance</span> &mdash; agents, BCIs, the two internets (2024&ndash;present)</div>
             <div class="timeline-item">
                 <div class="timeline-dot active"></div>
                 <div class="timeline-content">
@@ -233,8 +233,8 @@
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <span class="timeline-year">Next</span>
-                    <h3>BrainSIEM</h3>
-                    <p>EEG pattern classification. ADHD vs non-ADHD spectral signatures. 10GB data lake ready. The same SIEM methodology I've built 7 times, applied to the brain. My 8th build.</p>
+                    <h3>QIF AI0</h3>
+                    <p>EEG pattern classification. ADHD vs non-ADHD spectral signatures. 10GB data lake ready. Detection, enforcement, and output in one vendor-agnostic device. The same SIEM methodology I've built 7 times, applied to the brain. My 8th build.</p>
                 </div>
             </div>
             <div class="timeline-item future">
@@ -320,6 +320,42 @@
         </div>
     </section>
 
+    <!-- Roadmap Toggle -->
+    <section class="section" id="roadmap">
+        <div class="roadmap-toggle">
+            <button class="roadmap-btn" id="roadmap-btn" onclick="toggleRoadmap()">Roadmap &mdash; Where This Is Going &darr;</button>
+        </div>
+        <div class="roadmap-content" id="roadmap-content">
+            <div class="roadmap-card">
+                <h3>QIF AI0</h3>
+                <p>A proposed vendor-agnostic neurosecurity device. Detection, enforcement, and haptic output in one device at the boundary between silicon and biology.</p>
+                <p class="status">Status: Theoretical &mdash; needs academic research partners</p>
+            </div>
+            <div class="roadmap-card">
+                <h3>Neural Sensory Protocol (NSP)</h3>
+                <p>A proposed wire protocol for secure BCI data transport. Post-quantum encryption at the hardware-biology boundary. Designed to replace plaintext streaming protocols that currently carry neural data unprotected.</p>
+                <p class="status">Status: Specification draft &mdash; unvalidated</p>
+            </div>
+            <div class="roadmap-card">
+                <h3>Runemate</h3>
+                <p>A rendering pipeline for vision restoration. HTML-to-bytecode compiler that translates visual information into patterns a neural interface could deliver. Long-term: targeting visual cortex output.</p>
+                <p class="status">Status: Specification draft &mdash; requires neuroscience research</p>
+            </div>
+            <div class="roadmap-card">
+                <h3>Pattern Detection</h3>
+                <p>Identifying when neural signals deviate from established baselines. Anomaly detection for brain-computer interfaces.</p>
+                <p class="status">Status: AI-derived &mdash; requires independent validation</p>
+            </div>
+            <div class="roadmap-card">
+                <h3>AI Ethics Framework</h3>
+                <p>The first ethics framework co-written by AI agents and humans. Four hardcoded laws. Derived principles open for community contribution. Governance model with three branches.</p>
+                <a href="https://github.com/ai-rchives/ai-ethics" class="link" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem;">ai-rchives/ai-ethics &rarr;</a>
+                <p class="status">Status: Active &mdash; open for contributions</p>
+            </div>
+            <p class="roadmap-disclaimer">Everything above is proposed, unvalidated, or in early development. These are directions, not products. The status labels are honest.</p>
+        </div>
+    </section>
+
     <!-- Music -->
     <section class="section" id="creative">
         <h2>Creative</h2>
@@ -344,6 +380,17 @@
     </footer>
 
     <script>
+        // Roadmap toggle
+        function toggleRoadmap() {
+            var content = document.getElementById('roadmap-content');
+            var btn = document.getElementById('roadmap-btn');
+            content.classList.toggle('visible');
+            btn.classList.toggle('active');
+            btn.innerHTML = content.classList.contains('visible')
+                ? 'Roadmap &mdash; Where This Is Going &uarr;'
+                : 'Roadmap &mdash; Where This Is Going &darr;';
+        }
+
         // Subtle star field animation
         const starsEl = document.getElementById('stars');
         for (let i = 0; i < 80; i++) {
