@@ -48,6 +48,55 @@ body {
                 var(--bg-deep);
 }
 
+/* ONI Layer Visualization — ambient hero background */
+.oni-layers {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 3s ease;
+}
+
+.oni-layers.loaded { opacity: 1; }
+
+.oni-band {
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    opacity: 0.04;
+    transition: opacity 0.6s ease;
+}
+
+.hero:hover .oni-band {
+    opacity: 0.08;
+}
+
+.oni-node {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: oniPulse 6s ease-in-out infinite;
+}
+
+@keyframes oniPulse {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.15; transform: scale(1); }
+}
+
+.oni-connector {
+    position: absolute;
+    height: 1px;
+    opacity: 0.02;
+    transform-origin: left center;
+}
+
 .stars {
     position: absolute;
     inset: 0;
@@ -496,6 +545,37 @@ footer {
 .footer-copy {
     color: var(--text-muted);
     font-size: 0.75rem;
+}
+
+/* ONI Easter egg — hidden inside the layer visualization */
+.oni-egg {
+    position: absolute;
+    bottom: 18%;
+    right: 22%;
+    width: 18px;
+    height: 22px;
+    color: rgba(139, 92, 246, 0.06);
+    cursor: default;
+    opacity: 0;
+    transition: opacity 1.5s ease, color 0.3s ease;
+    z-index: 2;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.oni-egg.visible {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.oni-egg:hover {
+    color: rgba(139, 92, 246, 0.25);
+}
+
+.oni-egg svg {
+    width: 100%;
+    height: 100%;
 }
 
 /* Mobile */

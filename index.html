@@ -31,6 +31,14 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-bg">
+            <div class="oni-layers" id="oniLayers" aria-hidden="true">
+                <a class="oni-egg" id="oniEgg" href="/vibe-check/">
+                    <svg viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="12" cy="17" rx="10" ry="13" stroke="currentColor" stroke-width="1" fill="none"/>
+                        <path d="M7 12 Q12 8 17 12" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.5"/>
+                    </svg>
+                </a>
+            </div>
             <div class="stars" id="stars"></div>
         </div>
         <div class="hero-content">
@@ -106,9 +114,9 @@
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="timeline-year">2005&ndash;2007</span>
-                    <h3>MySpace &amp; High School</h3>
-                    <p>Still making Photoshop work but less of it. Custom MySpace layouts, profile skins. Stopped after freshman year to get fit. The design skills stayed dormant until I taught my friends Photoshop.</p>
+                    <span class="timeline-year">2004&ndash;2008</span>
+                    <h3>High School</h3>
+                    <p>Custom MySpace layouts and profile skins for friends. Still doing Photoshop work but less of it. Stopped after freshman year to get fit. The design skills stayed dormant until I taught my friends Photoshop.</p>
                 </div>
             </div>
             <div class="timeline-item">
@@ -121,7 +129,16 @@
                 </div>
             </div>
 
-            <!-- Security Era -->\n
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2010&ndash;2012</span>
+                    <h3>PC &amp; Laptop Repair Specialist</h3>
+                    <p>Appointed as the shop's laptop repair specialist. Eventually responsible for all MacBook repairs &mdash; logic boards, monitors, RAM, fans, full teardowns. First job where someone handed me something broken and I handed it back working.</p>
+                </div>
+            </div>
+
+            <!-- Security Era -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
@@ -188,24 +205,6 @@
             </div>
 
             <!-- Builder Era -->
-            <div class="timeline-item">
-                <div class="timeline-dot active"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2026</span>
-                    <h3>SixDots</h3>
-                    <p>Haptic braille learning app. Category-based sonification. Braille Beat rhythm game synced to original music. Multi-language braille support. In development.</p>
-                    <p class="dim">To help the blind, I am learning how they see the world. To build BCI output channels, I needed to understand haptic encoding. Braille is the oldest haptic system in existence (1824). I learned it by building the app.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot active"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2026</span>
-                    <h3>Spot</h3>
-                    <p>LiDAR guide for the blind. Stairs feel like ascending taps. Curbs thump. Walls buzz. Your dog's position pulses through your hand. Built on the same phone everyone already carries.</p>
-                    <p class="dim">Most blind people will never have a guide dog. 1&ndash;5 year waitlist. $20&ndash;50K. Your pet already knows you. Spot helps you see them.</p>
-                </div>
-            </div>
             <!-- Developer Tools -->
             <div class="timeline-item">
                 <div class="timeline-dot active"></div>
@@ -221,70 +220,16 @@
                 <div class="timeline-content">
                     <span class="timeline-year">2026</span>
                     <h3>AI-rchives</h3>
-                    <p>Open-source project where humans and AI agents recover lost artifacts of the internet from open web crawl data. Mapping the entire web. Archiving what the archives missed.</p>
+                    <p>Open-source project where humans and AI agents recover lost artifacts of the internet from open web crawl data. Archiving what the archives missed.</p>
                     <p class="dim">The internet is a civilization. Most traffic is already bots. The AI internet isn't coming &mdash; it's here. AI-rchives is a prototype for how the two internets coexist.</p>
                     <a href="/ai-rchives/" class="link">Explore &rarr;</a>
                 </div>
             </div>
 
             <div class="timeline-era"><span>What's Next</span> &mdash; the brain is the last interface</div>
-            <div class="timeline-item future">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">Next</span>
-                    <h3>QIF AI0</h3>
-                    <p>EEG pattern classification. ADHD vs non-ADHD spectral signatures. 10GB data lake ready. Detection, enforcement, and output in one vendor-agnostic device. The same SIEM methodology I've built 7 times, applied to the brain. My 8th build.</p>
-                </div>
-            </div>
-            <div class="timeline-item future">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">Future</span>
-                    <h3>SubVoc BCI</h3>
-                    <p>Subvocalization interface. Think a letter. EMG reads your throat. Phone vibrates it in braille. You read your own thoughts through your fingertips. $60 in parts. Building it in my dad's basement.</p>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Products -->
-    <section class="section dark" id="products">
-        <h2>What I Built</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-icon">&#x2800;&#x283F;</div>
-                <h3>SixDots</h3>
-                <p>Feel Braille, Feel Scene</p>
-                <span class="product-tag">iOS App</span>
-                <span class="product-tag">Haptics</span>
-                <span class="product-tag">In Development</span>
-            </div>
-            <div class="product-card">
-                <div class="product-icon">&#128021;</div>
-                <h3>Spot</h3>
-                <p>LiDAR guide for the blind</p>
-                <span class="product-tag">LiDAR</span>
-                <span class="product-tag">CoreML</span>
-                <span class="product-tag">Accessibility</span>
-            </div>
-            <div class="product-card">
-                <div class="product-icon">&#x1F6E1;</div>
-                <h3>QIF</h3>
-                <p>BCI threat intelligence</p>
-                <span class="product-tag">161 Techniques</span>
-                <span class="product-tag">NISS Scoring</span>
-                <a href="https://qinnovate.com" class="link" target="_blank" rel="noopener noreferrer">Explore &rarr;</a>
-            </div>
-            <div class="product-card">
-                <div class="product-icon">&#127925;</div>
-                <h3>Braille Beat</h3>
-                <p>Guitar Hero for braille</p>
-                <span class="product-tag">Rhythm Game</span>
-                <span class="product-tag">Music Sync</span>
-                <span class="product-tag">Motor Learning</span>
-            </div>
-        </div>
-    </section>
 
     <!-- The Vision -->
     <section class="section" id="vision">
@@ -391,6 +336,86 @@
             star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
             starsEl.appendChild(star);
         }
+
+        // ONI Layer ambient visualization
+        // 14 layers of the ONI model, barely visible, color-coded
+        (function() {
+            var oni = document.getElementById('oniLayers');
+            if (!oni) return;
+
+            // ONI 14-layer color map (physical → cognitive → interface)
+            var layers = [
+                { color: '#00d4ff', y: 8 },   // L1 Physical
+                { color: '#00d4ff', y: 14 },   // L2 Transduction
+                { color: '#10b981', y: 22 },   // L3 Signal
+                { color: '#10b981', y: 30 },   // L4 Channel
+                { color: '#f59e0b', y: 38 },   // L5 Network
+                { color: '#f59e0b', y: 44 },   // L6 Processing
+                { color: '#8b5cf6', y: 50 },   // L7 Integration
+                { color: '#8b5cf6', y: 56 },   // L8 Representation
+                { color: '#ec4899', y: 62 },   // L9 Perception
+                { color: '#ec4899', y: 68 },   // L10 Cognition
+                { color: '#ec4899', y: 74 },   // L11 Consciousness
+                { color: '#ef4444', y: 80 },   // L12 Behavioral
+                { color: '#ef4444', y: 86 },   // L13 Social
+                { color: '#ef4444', y: 92 },   // L14 Ecological
+            ];
+
+            layers.forEach(function(l) {
+                // Horizontal band
+                var band = document.createElement('div');
+                band.className = 'oni-band';
+                band.style.top = l.y + '%';
+                band.style.background = 'linear-gradient(90deg, transparent 5%, ' + l.color + ' 30%, ' + l.color + ' 70%, transparent 95%)';
+                oni.appendChild(band);
+
+                // A few nodes along each band
+                for (var n = 0; n < 3; n++) {
+                    var node = document.createElement('div');
+                    node.className = 'oni-node';
+                    node.style.top = l.y + '%';
+                    node.style.left = (20 + Math.random() * 60) + '%';
+                    node.style.background = l.color;
+                    node.style.animationDelay = (Math.random() * 6) + 's';
+                    node.style.boxShadow = '0 0 4px ' + l.color;
+                    oni.appendChild(node);
+                }
+            });
+
+            // Vertical connectors between some layers
+            for (var c = 0; c < 8; c++) {
+                var conn = document.createElement('div');
+                conn.className = 'oni-connector';
+                var fromY = 10 + Math.random() * 75;
+                conn.style.top = fromY + '%';
+                conn.style.left = (15 + Math.random() * 70) + '%';
+                conn.style.width = '1px';
+                conn.style.height = (5 + Math.random() * 10) + '%';
+                conn.style.background = 'linear-gradient(to bottom, rgba(0,212,255,0.06), rgba(139,92,246,0.06))';
+                oni.appendChild(conn);
+            }
+
+            setTimeout(function() { oni.classList.add('loaded'); }, 500);
+        })();
+
+        // ONI easter egg — appears when scrolling fast through the hero
+        (function() {
+            var egg = document.getElementById('oniEgg');
+            if (!egg) return;
+            var lastScroll = 0;
+            var velocity = 0;
+            var shown = false;
+            window.addEventListener('scroll', function() {
+                var current = window.scrollY;
+                velocity = Math.abs(current - lastScroll);
+                lastScroll = current;
+                // Show egg if user scrolls fast while hero is still visible
+                if (velocity > 40 && current < window.innerHeight && !shown) {
+                    shown = true;
+                    egg.classList.add('visible');
+                }
+            });
+        })();
     </script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cd45039d01b5453aaeb1a07ac429568c"}'></script><!-- End Cloudflare Web Analytics -->
 </body>

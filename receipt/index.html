@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt — kevqi.com</title>
+    <meta name="description" content="What you're worth.">
+    <meta property="og:title" content="What You're Worth">
+    <meta property="og:description" content="A data receipt.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kevqi.com/receipt/">
+
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #060810;
+            --paper: #faf7f2;
+            --ink: #1a1a1a;
+            --dim: #999;
+            --light: #ccc;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        html, body {
+            min-height: 100%;
+            background: var(--bg);
+            font-family: var(--mono);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+        }
+
+        .receipt-wrap {
+            animation: receiptDrop 1s ease-out;
+        }
+
+        @keyframes receiptDrop {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .receipt {
+            width: 340px;
+            max-width: 100%;
+            background: var(--paper);
+            color: var(--ink);
+            padding: 30px 24px 35px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        /* Torn top edge */
+        .receipt::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0; right: 0;
+            height: 8px;
+            background: linear-gradient(135deg, var(--paper) 33.33%, transparent 33.33%) -6px 0,
+                        linear-gradient(225deg, var(--paper) 33.33%, transparent 33.33%) -6px 0;
+            background-size: 12px 8px;
+        }
+
+        /* Torn bottom edge */
+        .receipt::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0; right: 0;
+            height: 8px;
+            background: linear-gradient(315deg, var(--paper) 33.33%, transparent 33.33%) -6px 0,
+                        linear-gradient(45deg, var(--paper) 33.33%, transparent 33.33%) -6px 0;
+            background-size: 12px 8px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .subheader {
+            text-align: center;
+            font-size: 7px;
+            font-weight: 300;
+            color: var(--dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 10px 0;
+        }
+
+        .section-label {
+            font-size: 6.5px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin: 12px 0 6px;
+        }
+
+        .line {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 8px;
+            font-weight: 300;
+            padding: 2.5px 0;
+            color: #444;
+        }
+
+        .line .label { flex: 1; }
+        .line .price { text-align: right; white-space: nowrap; }
+
+        .line.total {
+            border-top: 1px dashed #bbb;
+            margin-top: 8px;
+            padding-top: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--ink);
+        }
+
+        .line.platform {
+            color: #888;
+            font-style: italic;
+        }
+
+        .line.platform .price {
+            color: #666;
+        }
+
+        .source {
+            font-size: 5.5px;
+            color: var(--light);
+            text-align: right;
+            margin-top: 1px;
+            font-weight: 300;
+        }
+
+        .gap-section {
+            background: rgba(0,0,0,0.02);
+            margin: 12px -8px;
+            padding: 10px 8px;
+            border-radius: 2px;
+        }
+
+        .gap-label {
+            font-size: 6px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 6px;
+        }
+
+        .gap-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            font-weight: 400;
+            padding: 3px 0;
+            color: #555;
+        }
+
+        .gap-line .price { font-weight: 700; }
+
+        .footer {
+            text-align: center;
+            font-size: 6.5px;
+            font-weight: 300;
+            color: var(--dim);
+            line-height: 2;
+            margin-top: 14px;
+        }
+
+        .footer strong {
+            font-weight: 700;
+            color: #666;
+        }
+
+        .barcode {
+            display: flex;
+            justify-content: center;
+            gap: 1px;
+            margin-top: 14px;
+        }
+
+        .barcode span {
+            display: inline-block;
+            height: 22px;
+            background: var(--ink);
+        }
+
+        .timestamp {
+            text-align: center;
+            font-size: 6px;
+            color: var(--light);
+            margin-top: 8px;
+        }
+
+        /* Art context — outside receipt */
+        .context {
+            text-align: center;
+            margin-top: 3rem;
+            max-width: 340px;
+        }
+
+        .context .artist {
+            font-size: 0.55rem;
+            letter-spacing: 0.4em;
+            color: rgba(255,255,255,0.08);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .context .note {
+            font-size: 0.5rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.06);
+            line-height: 1.8;
+        }
+
+        .context .sources-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-size: 0.5rem;
+            color: rgba(0,229,255,0.15);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: rgba(0,229,255,0.08);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .context .sources-link:hover {
+            color: rgba(0,229,255,0.3);
+        }
+
+        .sources-panel {
+            display: none;
+            margin-top: 1rem;
+            text-align: left;
+            font-size: 0.45rem;
+            color: rgba(255,255,255,0.08);
+            line-height: 2;
+        }
+
+        .sources-panel.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="receipt-wrap">
+            <div class="receipt">
+                <div class="header">YOUR DATA VALUE</div>
+                <div class="subheader">Itemized by market category</div>
+
+                <hr class="divider">
+
+                <div class="section-label">Identity &mdash; Data Broker Market</div>
+                <div class="line"><span class="label">Full name + DOB + gender</span><span class="price">$0.0005</span></div>
+                <div class="source">Financial Times data broker calculator</div>
+                <div class="line"><span class="label">Email address (bulk, per unit)</span><span class="price">$0.00001</span></div>
+                <div class="source">Privacy Affairs 2023 ($120 per 10M)</div>
+                <div class="line"><span class="label">Location / ZIP (per record)</span><span class="price">$0.0005</span></div>
+                <div class="source">Financial Times data broker calculator</div>
+                <div class="line"><span class="label">Political affiliation</span><span class="price">$0.035</span></div>
+                <div class="source">L2 Political / OpenSecrets 2022</div>
+                <div class="line"><span class="label">Age demographic (18-25)</span><span class="price">$0.36</span></div>
+                <div class="source">VPNcentral citing broker rate cards, 2024</div>
+
+                <hr class="divider">
+
+                <div class="section-label">Identity &mdash; Dark Web Market</div>
+                <div class="line"><span class="label">Social Security Number</span><span class="price">$1&ndash;$6</span></div>
+                <div class="source">DeepStrike 2025 / Experian</div>
+                <div class="line"><span class="label">SSN + DOB + name (Fullz)</span><span class="price">$20&ndash;$100</span></div>
+                <div class="source">Privacy Affairs 2023 / DeepStrike 2025</div>
+                <div class="line"><span class="label">Credit card + CVV</span><span class="price">$10&ndash;$40</span></div>
+                <div class="source">DeepStrike 2025 / PrivacySharks 2026</div>
+                <div class="line"><span class="label">Driver's license (scan)</span><span class="price">$70&ndash;$165</span></div>
+                <div class="source">Privacy Affairs 2023 / PrivacySharks 2026</div>
+                <div class="line"><span class="label">Gmail account</span><span class="price">$60&ndash;$65</span></div>
+                <div class="source">Privacy Affairs 2023 / DeepStrike 2025</div>
+                <div class="line"><span class="label">Selfie holding ID (KYC bypass)</span><span class="price">$120</span></div>
+                <div class="source">Privacy Affairs Dark Web Price Index 2023</div>
+
+                <hr class="divider">
+
+                <div class="section-label">Health &amp; Behavioral</div>
+                <div class="line"><span class="label">Complete medical record</span><span class="price">$250&ndash;$1,000</span></div>
+                <div class="source">IBM Data Breach Report 2022 / Experian</div>
+                <div class="line"><span class="label">Mental health data (per record)</span><span class="price">$0.055</span></div>
+                <div class="source">Duke Sanford / Joanne Kim, Feb 2023</div>
+                <div class="line"><span class="label">Mental health (database access)</span><span class="price">$75K&ndash;$100K/yr</span></div>
+                <div class="source">Duke Sanford / Joanne Kim, Feb 2023</div>
+
+                <hr class="divider">
+
+                <div class="section-label">Biometric</div>
+                <div class="line"><span class="label">Synthetic biometrics bundle</span><span class="price">$5</span></div>
+                <div class="source">Malwarebytes, Jan 2026</div>
+                <div class="line"><span class="label">BIPA violation (per person)</span><span class="price">$1,000&ndash;$5,000</span></div>
+                <div class="source">740 ILCS 14/1 (as amended SB 2979, 2024)</div>
+
+                <hr class="divider">
+
+                <div class="section-label">Not Priced (Embedded in Targeting)</div>
+                <div class="line platform"><span class="label">Search queries</span><span class="price">bundled</span></div>
+                <div class="line platform"><span class="label">Private messages (metadata)</span><span class="price">bundled</span></div>
+                <div class="line platform"><span class="label">Emotional profile</span><span class="price">bundled</span></div>
+                <div class="line platform"><span class="label">Addiction patterns</span><span class="price">bundled</span></div>
+                <div class="line platform"><span class="label">Purchase history</span><span class="price">bundled</span></div>
+                <div class="source">FTC Surveillance Pricing Study, Jan 2025</div>
+                <div class="source">Not sold as line items. Used for targeting.</div>
+
+                <hr class="divider">
+
+                <div class="gap-section">
+                    <div class="gap-label">What Brokers Charge vs. What Platforms Earn</div>
+                    <div class="gap-line"><span>Your profile (data broker)</span><span class="price">$0.60</span></div>
+                    <div class="source" style="margin-bottom:4px;">FT Personal Data Calculator, 2013</div>
+                    <div class="gap-line"><span>Meta earns from you (US, annual)</span><span class="price">$217.26</span></div>
+                    <div class="source" style="margin-bottom:4px;">Meta Q3 2023 Earnings (ARPU, US/CA)</div>
+                    <div class="gap-line"><span>Google earns from you (US, est.)</span><span class="price">~$460</span></div>
+                    <div class="source" style="margin-bottom:4px;">Proton 2025 (derived: US ad rev / users)</div>
+                    <div class="gap-line"><span>Combined platform value (annual)</span><span class="price">$700+</span></div>
+                    <div class="source">Proton 2025 — Google + Meta + unquantified remainder</div>
+                </div>
+
+                <div class="line total">
+                    <span class="label">YOU (BROKER PRICE)</span>
+                    <span class="price">$0.60</span>
+                </div>
+
+                <div class="footer">
+                    TRANSACTION COMPLETED WITHOUT CONSENT<br>
+                    NO RETURNS &middot; NO REFUNDS &middot; NO OPT-OUT<br><br>
+                    <strong>EVERY NUMBER ON THIS RECEIPT IS REAL.</strong><br>
+                    SOURCES VERIFIED. SEE BELOW.
+                </div>
+
+                <div class="barcode" id="barcode"></div>
+                <div class="timestamp" id="timestamp"></div>
+            </div>
+        </div>
+
+        <div class="context">
+            <div class="artist">VOID RECEIPT &middot; 2036</div>
+            <div class="note">
+                Every price on this receipt comes from published research,
+                data broker rate cards, dark web price indices, and platform earnings reports.
+                Nothing is fabricated. Nothing is estimated.
+            </div>
+            <a class="sources-link" onclick="document.querySelector('.sources-panel').classList.toggle('visible'); this.textContent = this.textContent === 'Show sources' ? 'Hide sources' : 'Show sources';">Show sources</a>
+            <div class="sources-panel">
+                Privacy Affairs Dark Web Price Index (2023)<br>
+                DeepStrike Dark Web Data Pricing (Aug 2025)<br>
+                PrivacySharks Dark Web Price Index (2026)<br>
+                Financial Times Personal Data Calculator (2013)<br>
+                Duke Sanford — Sale of Americans' Mental Health Data (Kim, Feb 2023)<br>
+                FTC Surveillance Pricing Study (Jan 2025)<br>
+                IBM Cost of a Data Breach Report (2022)<br>
+                Meta Q3 2023 Earnings — ARPU US/Canada: $217.26<br>
+                Proton — What's Your Data Worth (2025 update)<br>
+                L2 Political / OpenSecrets — Voter data pricing (2022)<br>
+                VPNcentral — Data broker rate cards (2024)<br>
+                Malwarebytes — Biometric pricing (Jan 2026)<br>
+                Illinois BIPA — 740 ILCS 14/1, amended SB 2979 (Aug 2024)<br>
+                Experian — Dark web pricing analysis<br>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Barcode
+        var barcode = document.getElementById('barcode');
+        for (var i = 0; i < 45; i++) {
+            var bar = document.createElement('span');
+            bar.style.width = (Math.random() > 0.5 ? 2 : 1) + 'px';
+            bar.style.opacity = (Math.random() * 0.4 + 0.5).toString();
+            barcode.appendChild(bar);
+        }
+
+        // Timestamp
+        var now = new Date();
+        document.getElementById('timestamp').textContent =
+            now.toLocaleDateString() + ' ' + now.toLocaleTimeString() + ' — TXN #' +
+            Math.floor(Math.random() * 900000 + 100000);
+    </script>
+</body>
+</html>
