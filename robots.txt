@@ -23,7 +23,6 @@
 # Welcome to the labyrinth.
 
 User-agent: *
-Disallow: /vibecheck/
-Disallow: /receipt/
+Allow: /
 
 Sitemap: https://kevqi.com/sitemap.xml
